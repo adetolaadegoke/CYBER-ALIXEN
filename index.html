@@ -1,128 +1,752 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080d18">
-  <title>CYBER ALIXEN | Security Platform</title>
-  <link rel="stylesheet" href="/static/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d18">
+<title>CYBER ALIXEN | Cybersecurity Platform</title>
+
+<style>
+:root{
+  --bg:#080d18;
+  --panel:#111d30;
+  --panel2:#172740;
+  --line:#293b56;
+  --text:#edf5ff;
+  --muted:#9aacc5;
+  --teal:#31e6c2;
+  --blue:#5b9cff;
+  --purple:#a78bfa;
+  --pink:#fb78b8;
+  --gold:#ffc66d;
+  --green:#67e8a5;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:radial-gradient(ellipse at top left,#17334a,transparent 40%),var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  line-height:1.6;
+}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.layout{display:grid;grid-template-columns:245px 1fr;min-height:100vh}
+aside{
+  background:#091321;
+  border-right:1px solid var(--line);
+  padding:25px 16px;
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+.brand{
+  font-size:19px;
+  font-weight:900;
+  letter-spacing:1px;
+  margin-bottom:35px;
+}
+.brand span{color:var(--teal)}
+.logo{
+  display:inline-grid;
+  place-items:center;
+  width:38px;height:38px;
+  border-radius:12px;
+  color:#06151b;
+  background:linear-gradient(135deg,var(--teal),var(--blue));
+  margin-right:8px;
+}
+.nav-title{
+  color:#7186a4;
+  font-size:10px;
+  letter-spacing:2px;
+  margin:20px 10px 8px;
+}
+nav{display:grid;gap:6px}
+nav button{
+  border:0;
+  padding:12px;
+  text-align:left;
+  border-radius:9px;
+  color:var(--muted);
+  background:transparent;
+}
+nav button:hover,nav button.active{
+  color:white;
+  background:#193247;
+  box-shadow:inset 3px 0 var(--teal);
+}
+.side-note{
+  margin-top:45px;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  color:var(--muted);
+  font-size:12px;
+}
+.side-note strong{color:var(--teal)}
+main{
+  width:100%;
+  max-width:1500px;
+  padding:28px clamp(16px,4vw,55px);
+  margin:auto;
+  min-width:0;
+}
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+  gap:10px;
+}
+.muted{color:var(--muted)}
+.status{
+  border:1px solid var(--line);
+  border-radius:30px;
+  padding:6px 12px;
+  color:var(--green);
+  font-size:11px;
+  font-weight:bold;
+}
+.page{display:none}
+.page.active{display:block}
+.eyebrow{
+  color:var(--teal);
+  font-size:11px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+h1{
+  font-size:clamp(35px,5vw,58px);
+  line-height:1.1;
+  margin:12px 0;
+}
+h1 span{
+  background:linear-gradient(90deg,var(--teal),var(--blue),var(--purple));
+  color:transparent;
+  background-clip:text;
+}
+h2{font-size:26px;margin:0 0 7px}
+h3{margin:0 0 8px}
+p{color:var(--muted)}
+.hero{
+  padding:clamp(25px,5vw,52px);
+  border:1px solid #31566b;
+  border-radius:22px;
+  background:linear-gradient(120deg,#102c3d,#182443,#292044);
+  box-shadow:0 18px 55px #0005;
+}
+.hero p{max-width:650px;font-size:16px}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:23px}
+.btn{
+  border:1px solid var(--line);
+  border-radius:9px;
+  padding:10px 15px;
+  background:var(--panel2);
+  color:white;
+  font-weight:bold;
+}
+.btn.primary{
+  color:#06151b;
+  border:0;
+  background:linear-gradient(110deg,var(--teal),#7bc8ff);
+}
+.btn:hover{filter:brightness(1.15)}
+.grid{display:grid;gap:15px}
+.stats{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  margin:20px 0 35px;
+}
+.card,.stat{
+  background:linear-gradient(145deg,var(--panel),#101a2b);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:19px;
+  min-width:0;
+}
+.stat{display:flex;align-items:center;gap:12px}
+.stat-icon{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border-radius:12px;
+  font-size:20px;
+}
+.teal{background:#31e6c222;color:var(--teal)}
+.blue{background:#5b9cff22;color:var(--blue)}
+.purple{background:#a78bfa22;color:var(--purple)}
+.pink{background:#fb78b822;color:var(--pink)}
+.gold{background:#ffc66d22;color:var(--gold)}
+.stat small{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:bold;
+}
+.stat strong{font-size:20px}
+.section-head{margin:28px 0 15px}
+.modules{grid-template-columns:repeat(3,minmax(0,1fr))}
+.module{cursor:pointer;transition:.2s}
+.module:hover{transform:translateY(-3px);border-color:var(--teal)}
+.module-icon{font-size:26px;margin-bottom:12px}
+.tag{
+  display:inline-block;
+  color:var(--teal);
+  background:#1d3547;
+  padding:4px 8px;
+  border-radius:20px;
+  font-size:10px;
+  font-weight:bold;
+}
+.card p{font-size:13px}
+.two{grid-template-columns:1.2fr .8fr}
+.tool-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+label{
+  display:block;
+  margin:12px 0 6px;
+  color:#bdcbe0;
+  font-size:12px;
+  font-weight:bold;
+}
+input:not([type=radio]),textarea{
+  width:100%;
+  background:#091321;
+  color:white;
+  border:1px solid var(--line);
+  border-radius:8px;
+  padding:11px;
+}
+textarea{min-height:90px;resize:vertical}
+input:focus,textarea:focus{outline:1px solid var(--teal)}
+.result{
+  margin-top:12px;
+  padding:12px;
+  background:#091321;
+  border:1px solid var(--line);
+  border-radius:8px;
+  color:var(--teal);
+  font-size:12px;
+  overflow-wrap:anywhere;
+  white-space:pre-wrap;
+}
+.choice{
+  display:flex;
+  gap:9px;
+  align-items:flex-start;
+  padding:10px;
+  margin:8px 0;
+  border:1px solid var(--line);
+  border-radius:8px;
+  color:#d5e1f0;
+}
+.choice input{margin-top:5px}
+.list{display:grid;gap:10px}
+.list-item{
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+.list-item:last-child{border:0}
+.feature-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.feature{
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:9px;
+  background:#0d192a;
+}
+.feature small{display:block;color:var(--muted)}
+.progress{
+  height:8px;
+  background:#293b56;
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0;
+}
+.progress span{
+  display:block;
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--teal),var(--blue));
+}
+.post{
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:12px;
+  margin-top:10px;
+  background:#0b1627;
+}
+footer{
+  margin-top:50px;
+  padding:20px 0;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:12px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+@media(max-width:1000px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .modules{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:750px){
+  .layout{display:block}
+  aside{
+    height:auto;
+    position:sticky;
+    z-index:5;
+    padding:10px;
+    border-right:0;
+    border-bottom:1px solid var(--line);
+  }
+  .brand{margin:0 0 8px}
+  .nav-title,.side-note{display:none}
+  nav{display:flex;overflow-x:auto}
+  nav button{white-space:nowrap;font-size:12px;padding:9px}
+  main{padding:20px 14px}
+  .two,.tool-grid{grid-template-columns:1fr}
+}
+@media(max-width:450px){
+  .stats,.modules,.feature-list{grid-template-columns:1fr}
+  footer{display:block}
+}
+</style>
 </head>
+
 <body>
-  <header class="topbar">
-    <a class="brand" href="/">CYBER <span>ALIXEN</span></a>
-    <span class="status"><i></i> PLATFORM ONLINE</span>
-  </header>
+<div class="layout">
 
-  <main class="container">
-    <section class="hero">
-      <p class="eyebrow">CYBERSECURITY LEARNING PLATFORM</p>
-      <h1>Protect. Learn. <span>Secure.</span></h1>
-      <p class="intro">
-        Learn cybersecurity, explore defensive security tools,
-        and build safer digital habits.
-      </p>
-      <div class="hero-actions">
-        <a class="button primary" href="#tools">Explore tools</a>
-        <a class="button secondary" href="#learning">Start learning</a>
-      </div>
-    </section>
+<aside>
+ <div class="brand"><span class="logo">A</span>CYBER <span>ALIXEN</span></div>
+ <div class="nav-title">MAIN MENU</div>
+ <nav>
+  <button class="active" data-page="dashboard">⌂ Dashboard</button>
+  <button data-page="tools">⚙ Security tools</button>
+  <button data-page="learning">▤ Learning</button>
+  <button data-page="labs">⌘ Safe labs</button>
+  <button data-page="community">◎ Community</button>
+  <button data-page="device">▣ Device check</button>
+  <button data-page="about">ⓘ About</button>
+ </nav>
+ <div class="side-note">
+  <strong>DEFEND WITH KNOWLEDGE</strong>
+  <p>Learn cybersecurity. Practise responsibly. Help make technology safer.</p>
+ </div>
+</aside>
 
-    <section class="stats">
-      <article class="stat">
-        <span class="stat-label">PLATFORM</span>
-        <strong id="platform-status">Checking...</strong>
-      </article>
-      <article class="stat">
-        <span class="stat-label">VERSION</span>
-        <strong>1.0.0</strong>
-      </article>
-      <article class="stat">
-        <span class="stat-label">SECURITY TOOLS</span>
-        <strong>03</strong>
-      </article>
-    </section>
+<main>
+ <div class="topbar">
+  <span class="muted">CYBER ALIXEN / <b id="crumb">Dashboard</b></span>
+  <span class="status">● FRONTEND ONLINE</span>
+ </div>
 
-    <section id="tools">
-      <div class="section-heading">
-        <p class="eyebrow">DEFENSIVE UTILITIES</p>
-        <h2>Security tools</h2>
-      </div>
+<!-- DASHBOARD -->
+<section class="page active" id="page-dashboard">
+ <div class="hero">
+  <div class="eyebrow">YOUR CYBERSECURITY WORKSPACE</div>
+  <h1>Protect. Learn.<br><span>Secure the digital world.</span></h1>
+  <p>Explore defensive security tools, learn safer digital habits, practise cybersecurity concepts and prepare for the future of technology.</p>
+  <div class="actions">
+   <button class="btn primary" data-go="tools">Explore security tools →</button>
+   <button class="btn" data-go="learning">Start learning</button>
+  </div>
+ </div>
 
-      <div class="tool-grid">
-        <article class="panel">
-          <h3>SHA-256 Hash Generator</h3>
-          <p>Generate a SHA-256 hash from text you enter.</p>
-          <label for="hash-input">Text to hash</label>
-          <textarea id="hash-input" placeholder="Enter text here..."></textarea>
-          <button class="button primary" id="hash-button">Generate hash</button>
-          <pre id="hash-result" class="result">Your hash will appear here.</pre>
-        </article>
+ <div class="grid stats">
+  <div class="stat"><div class="stat-icon teal">◈</div><div><small>PLATFORM</small><strong>Online</strong></div></div>
+  <div class="stat"><div class="stat-icon blue">⚙</div><div><small>TOOLS</small><strong>03</strong></div></div>
+  <div class="stat"><div class="stat-icon purple">▤</div><div><small>LEARNING</small><strong>04 topics</strong></div></div>
+  <div class="stat"><div class="stat-icon gold">⌘</div><div><small>SAFE LABS</small><strong>Ready</strong></div></div>
+ </div>
 
-        <article class="panel">
-          <h3>Password Safety Check</h3>
-          <p>Get a basic, local estimate of password strength.</p>
-          <label for="password-input">Test a sample password</label>
-          <input id="password-input" type="password"
-                 autocomplete="off" placeholder="Enter a sample">
-          <button class="button primary" id="password-button">Check strength</button>
-          <p id="password-result" class="result" aria-live="polite">
-            Your result will appear here.
-          </p>
-          <p class="hint">Do not enter a real or reused password.</p>
-        </article>
+ <div class="section-head">
+  <div class="eyebrow">EXPLORE THE PLATFORM</div>
+  <h2>Platform modules</h2>
+ </div>
 
-        <article class="panel">
-          <h3>Platform API</h3>
-          <p>Check whether the CYBER ALIXEN backend is responding.</p>
-          <button class="button primary" id="health-button">Check status</button>
-          <pre id="health-result" class="result">Waiting for check...</pre>
-        </article>
-      </div>
-    </section>
+ <div class="grid modules">
+  <article class="card module" data-go="tools">
+   <div class="module-icon teal">⚙</div>
+   <span class="tag">AVAILABLE</span>
+   <h3>Security tools</h3>
+   <p>Generate SHA-256 hashes and learn password safety basics.</p>
+  </article>
+  <article class="card module" data-go="learning">
+   <div class="module-icon blue">▤</div>
+   <span class="tag">AVAILABLE</span>
+   <h3>Learning centre</h3>
+   <p>Learn about privacy, phishing, account security and updates.</p>
+  </article>
+  <article class="card module" data-go="labs">
+   <div class="module-icon purple">⌘</div>
+   <span class="tag">SAFE DEMO</span>
+   <h3>Practice labs</h3>
+   <p>Complete fictional defensive security scenarios.</p>
+  </article>
+  <article class="card module" data-go="community">
+   <div class="module-icon pink">◎</div>
+   <span class="tag">LOCAL DEMO</span>
+   <h3>Community</h3>
+   <p>Preview a community discussion board.</p>
+  </article>
+  <article class="card module" data-go="device">
+   <div class="module-icon gold">▣</div>
+   <span class="tag">AVAILABLE</span>
+   <h3>Device information</h3>
+   <p>View basic browser and screen information.</p>
+  </article>
+  <article class="card module" data-go="about">
+   <div class="module-icon teal">✦</div>
+   <span class="tag">ROADMAP</span>
+   <h3>AI assistant</h3>
+   <p>Explore planned AI and platform features.</p>
+  </article>
+ </div>
 
-    <section id="learning">
-      <div class="section-heading">
-        <p class="eyebrow">SECURITY AWARENESS</p>
-        <h2>Phishing awareness quiz</h2>
-      </div>
+ <div class="section-head"><h2>Essential security habits</h2></div>
+ <div class="grid two">
+  <div class="card">
+   <div class="list">
+    <div class="list-item">🔑 <b>Use unique passwords</b><p>Use a trusted password manager.</p></div>
+    <div class="list-item">🛡 <b>Enable multi-factor authentication</b><p>Add protection to important accounts.</p></div>
+    <div class="list-item">⬆ <b>Keep software updated</b><p>Install updates from official sources.</p></div>
+   </div>
+  </div>
+  <div class="card">
+   <div class="eyebrow">PLATFORM STATUS</div>
+   <h3>GitHub Pages preview</h3>
+   <p>This website runs as a static frontend. Cloud accounts, shared messages, AI and databases require a separately hosted backend.</p>
+   <button class="btn" data-go="about">View roadmap</button>
+  </div>
+ </div>
+</section>
 
-      <article class="panel quiz">
-        <h3>Which is the safest response to an unexpected email asking you to sign in?</h3>
-        <label class="choice">
-          <input type="radio" name="quiz" value="a">
-          Click the email link immediately.
-        </label>
-        <label class="choice">
-          <input type="radio" name="quiz" value="b">
-          Visit the official website yourself and verify the message.
-        </label>
-        <label class="choice">
-          <input type="radio" name="quiz" value="c">
-          Reply with your password.
-        </label>
-        <button class="button primary" id="quiz-button">Submit answer</button>
-        <p id="quiz-result" aria-live="polite"></p>
-      </article>
-    </section>
+<!-- TOOLS -->
+<section class="page" id="page-tools">
+ <div class="eyebrow">DEFENSIVE UTILITIES</div>
+ <h1>Security <span>tools</span></h1>
+ <p class="muted">Browser-based learning utilities. Use fictional sample data, not real passwords.</p>
 
-    <section class="panel roadmap">
-      <p class="eyebrow">COMING NEXT</p>
-      <h2>Platform roadmap</h2>
-      <ul>
-        <li>Secure user registration and sign-in</li>
-        <li>AI assistant for defensive security questions</li>
-        <li>Community discussions and groups</li>
-        <li>Safe, isolated cybersecurity practice labs</li>
-        <li>Android and desktop applications</li>
-      </ul>
-    </section>
+ <div class="grid tool-grid">
+  <div class="card">
+   <div class="module-icon teal">#</div>
+   <h3>SHA-256 hash generator</h3>
+   <p>Generate a SHA-256 hash from sample text in your browser.</p>
+   <label for="hash-input">Sample text</label>
+   <textarea id="hash-input" placeholder="Enter sample text..."></textarea>
+   <button class="btn primary" id="hash-btn">Generate hash</button>
+   <div class="result" id="hash-result">Your hash appears here.</div>
+  </div>
 
-    <footer>
-      <strong>CYBER ALIXEN</strong>
-      <p>Built for learning, defensive security, and safer technology.</p>
-    </footer>
-  </main>
+  <div class="card">
+   <div class="module-icon blue">🔐</div>
+   <h3>Password safety estimate</h3>
+   <p>Try a fictional sample password. Do not enter a password you actually use.</p>
+   <label for="pass-input">Sample password</label>
+   <input id="pass-input" type="password" autocomplete="off" placeholder="Fictional sample only">
+   <button class="btn primary" id="pass-btn">Check sample</button>
+   <div class="progress"><span id="pass-bar"></span></div>
+   <div class="result" id="pass-result">No sample checked.</div>
+   <p>Educational estimate only, not a security guarantee.</p>
+  </div>
 
-  <script src="/static/app.js"></script>
+  <div class="card">
+   <div class="module-icon purple">✓</div>
+   <h3>Security checklist</h3>
+   <label class="choice"><input type="checkbox" class="check"> I use unique passwords.</label>
+   <label class="choice"><input type="checkbox" class="check"> I enable multi-factor authentication.</label>
+   <label class="choice"><input type="checkbox" class="check"> I install trusted updates.</label>
+   <label class="choice"><input type="checkbox" class="check"> I verify unexpected links.</label>
+   <div class="result" id="check-result">0 of 4 completed.</div>
+  </div>
+
+  <div class="card">
+   <div class="module-icon gold">🌐</div>
+   <h3>Safe browsing guide</h3>
+   <div class="list">
+    <div class="list-item"><b>01 — Check domains</b><p>Look carefully for misspellings.</p></div>
+    <div class="list-item"><b>02 — Be cautious</b><p>Unexpected urgency can be a warning sign.</p></div>
+    <div class="list-item"><b>03 — Verify independently</b><p>Use the official app or website.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- LEARNING -->
+<section class="page" id="page-learning">
+ <div class="eyebrow">LEARNING CENTRE</div>
+ <h1>Learn to stay <span>secure.</span></h1>
+ <p class="muted">Build practical habits for safer everyday technology use.</p>
+ <div class="grid modules">
+  <div class="card"><div class="module-icon teal">🔑</div><h3>Account security</h3><p>Use long, unique passwords and multi-factor authentication. Never share verification codes.</p></div>
+  <div class="card"><div class="module-icon blue">✉</div><h3>Phishing awareness</h3><p>Check senders, unexpected attachments and unusual requests. Verify messages independently.</p></div>
+  <div class="card"><div class="module-icon purple">🔒</div><h3>Privacy basics</h3><p>Review app permissions and limit personal information shared publicly.</p></div>
+  <div class="card"><div class="module-icon gold">⬆</div><h3>Updates and backups</h3><p>Keep devices updated and back up important files.</p></div>
+ </div>
+
+ <div class="card" style="margin-top:18px">
+  <div class="eyebrow">KNOWLEDGE CHECK</div>
+  <h3>A message asks you to sign in through an unexpected link. What should you do?</h3>
+  <label class="choice"><input type="radio" name="learn" value="a"> Click immediately.</label>
+  <label class="choice"><input type="radio" name="learn" value="b"> Visit the official website independently.</label>
+  <label class="choice"><input type="radio" name="learn" value="c"> Send the sender your verification code.</label>
+  <button class="btn primary" id="learn-btn">Check answer</button>
+  <div class="result" id="learn-result">Choose an answer.</div>
+ </div>
+</section>
+
+<!-- LABS -->
+<section class="page" id="page-labs">
+ <div class="eyebrow">SAFE PRACTICE ZONE</div>
+ <h1>Practice <span>defence.</span></h1>
+ <p class="muted">Fictional security-awareness exercises. No real systems are tested.</p>
+ <div class="grid two">
+  <div class="card">
+   <div class="module-icon purple">🧪</div>
+   <h3>Phishing scenario</h3>
+   <p>A delivery message asks you to provide personal details through an unfamiliar link.</p>
+   <b>What is the safest response?</b>
+   <label class="choice"><input type="radio" name="lab" value="a"> Open the link and provide details.</label>
+   <label class="choice"><input type="radio" name="lab" value="b"> Visit the official company website independently.</label>
+   <label class="choice"><input type="radio" name="lab" value="c"> Forward it to everyone.</label>
+   <button class="btn primary" id="lab-btn">Submit answer</button>
+   <div class="result" id="lab-result">Your feedback appears here.</div>
+  </div>
+  <div class="card">
+   <div class="module-icon teal">🛡</div>
+   <h3>Practice rules</h3>
+   <div class="list">
+    <div class="list-item"><b>Use authorised environments</b><p>Only practise in systems designed for learning or where you have permission.</p></div>
+    <div class="list-item"><b>Use fictional information</b><p>Never enter real passwords into exercises.</p></div>
+    <div class="list-item"><b>Focus on defence</b><p>Learn prevention, detection and recovery.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="page" id="page-community">
+ <div class="eyebrow">COMMUNITY PREVIEW</div>
+ <h1>Share what you <span>learn.</span></h1>
+ <p class="muted">This is a local demonstration. Posts are stored only in this browser, not shared with other visitors.</p>
+ <div class="grid two">
+  <div class="card">
+   <h3>Create a learning post</h3>
+   <label for="post-name">Display name</label>
+   <input id="post-name" maxlength="30" placeholder="Learner">
+   <label for="post-text">Your post</label>
+   <textarea id="post-text" maxlength="400" placeholder="Share a safe cybersecurity tip..."></textarea>
+   <button class="btn primary" id="post-btn">Publish local demo post</button>
+   <p>Do not post passwords, private contact details or personal information.</p>
+  </div>
+  <div class="card">
+   <h3>Community feed</h3>
+   <div id="feed">
+    <div class="post"><b>CYBER ALIXEN</b><p>Welcome! Share safe learning tips and defensive security knowledge.</p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- DEVICE -->
+<section class="page" id="page-device">
+ <div class="eyebrow">DEVICE INFORMATION</div>
+ <h1>Browser <span>snapshot.</span></h1>
+ <p class="muted">Limited information shared by your browser. This page does not scan private files or access your camera or microphone.</p>
+ <div class="grid modules">
+  <div class="card"><div class="eyebrow">BROWSER</div><h3 id="browser-info">Checking...</h3></div>
+  <div class="card"><div class="eyebrow">SCREEN SIZE</div><h3 id="screen-info">Checking...</h3></div>
+  <div class="card"><div class="eyebrow">LANGUAGE</div><h3 id="language-info">Checking...</h3></div>
+  <div class="card"><div class="eyebrow">PLATFORM</div><h3 id="platform-info">Checking...</h3></div>
+ </div>
+ <div class="card" style="margin-top:18px">
+  <h3>Privacy information</h3>
+  <p>This page displays basic browser information locally. It does not request your location, contacts, camera or microphone.</p>
+ </div>
+</section>
+
+<!-- ABOUT -->
+<section class="page" id="page-about">
+ <div class="eyebrow">PROJECT ROADMAP</div>
+ <h1>CYBER <span>ALIXEN.</span></h1>
+ <p class="muted">A cybersecurity learning and defensive security platform designed to grow into a full online service.</p>
+ <div class="grid two">
+  <div class="card">
+   <h3>Available in this version</h3>
+   <div class="feature-list">
+    <div class="feature"><b>Dashboard</b><small>Responsive design</small></div>
+    <div class="feature"><b>Hash tool</b><small>Browser-based</small></div>
+    <div class="feature"><b>Password estimate</b><small>Sample only</small></div>
+    <div class="feature"><b>Learning quizzes</b><small>Interactive</small></div>
+    <div class="feature"><b>Device snapshot</b><small>Browser details</small></div>
+    <div class="feature"><b>Community demo</b><small>Local storage</small></div>
+   </div>
+  </div>
+  <div class="card">
+   <h3>Future development</h3>
+   <div class="list">
+    <div class="list-item"><b>01 — Secure accounts</b><p>Registration, verification and account protection.</p></div>
+    <div class="list-item"><b>02 — Online database</b><p>Secure storage for user and community data.</p></div>
+    <div class="list-item"><b>03 — AI assistant</b><p>Defensive security chat and code explanations.</p></div>
+    <div class="list-item"><b>04 — Community</b><p>Shared posts, groups and moderation.</p></div>
+    <div class="list-item"><b>05 — Applications</b><p>Android and desktop clients.</p></div>
+   </div>
+  </div>
+ </div>
+ <div class="card" style="margin-top:18px">
+  <h3>Important deployment information</h3>
+  <p>GitHub Pages hosts the website frontend. It cannot run Python servers, host a database or securely store private AI keys. Those features need a separately deployed backend and database.</p>
+ </div>
+</section>
+
+<footer>
+ <span>© <span id="year"></span> CYBER ALIXEN</span>
+ <span>Learn responsibly · Defend ethically · Stay curious</span>
+</footer>
+</main>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+function go(page){
+ document.querySelectorAll(".page").forEach(p=>{
+  p.classList.toggle("active",p.id==="page-"+page);
+ });
+ document.querySelectorAll("nav button").forEach(b=>{
+  b.classList.toggle("active",b.dataset.page===page);
+ });
+ $("crumb").textContent=page.charAt(0).toUpperCase()+page.slice(1);
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.querySelectorAll("[data-page]").forEach(b=>{
+ b.addEventListener("click",()=>go(b.dataset.page));
+});
+document.querySelectorAll("[data-go]").forEach(b=>{
+ b.addEventListener("click",()=>go(b.dataset.go));
+});
+
+// SHA-256 HASH TOOL
+$("hash-btn").addEventListener("click",async()=>{
+ const value=$("hash-input").value;
+ if(!value.trim()){
+  $("hash-result").textContent="Enter sample text first.";
+  return;
+ }
+ try{
+  const data=new TextEncoder().encode(value);
+  const digest=await crypto.subtle.digest("SHA-256",data);
+  const hash=Array.from(new Uint8Array(digest))
+   .map(x=>x.toString(16).padStart(2,"0")).join("");
+  $("hash-result").textContent="SHA-256\n"+hash;
+ }catch(e){
+  $("hash-result").textContent="Hashing is unavailable in this browser.";
+ }
+});
+
+// PASSWORD SAMPLE ESTIMATE
+$("pass-btn").addEventListener("click",()=>{
+ const v=$("pass-input").value;
+ if(!v){
+  $("pass-result").textContent="Enter a fictional sample.";
+  return;
+ }
+ let score=0;
+ if(v.length>=14)score++;
+ if(/[a-z]/.test(v)&&/[A-Z]/.test(v))score++;
+ if(/[0-9]/.test(v))score++;
+ if(/[^A-Za-z0-9]/.test(v))score++;
+ const names=["Very weak sample","Weak sample","Fair sample","Good sample","Stronger sample"];
+ $("pass-bar").style.width=(score*25)+"%";
+ $("pass-result").textContent=names[score]+". This is only a basic estimate.";
+});
+
+// CHECKLIST
+function updateChecks(){
+ const boxes=[...document.querySelectorAll(".check")];
+ const done=boxes.filter(x=>x.checked).length;
+ $("check-result").textContent=done+" of "+boxes.length+" completed.";
+}
+document.querySelectorAll(".check").forEach(x=>{
+ x.addEventListener("change",updateChecks);
+});
+updateChecks();
+
+// QUIZZES
+function answerQuiz(group,result,correct,message){
+ const selected=document.querySelector('input[name="'+group+'"]:checked');
+ if(!selected){
+  $(result).textContent="Choose an answer first.";
+  return;
+ }
+ $(result).textContent=selected.value===correct
+  ?message
+  :"Not quite. Review the safest answer and try again.";
+}
+$("learn-btn").addEventListener("click",()=>{
+ answerQuiz("learn","learn-result","b","Correct! Verify through the official website.");
+});
+$("lab-btn").addEventListener("click",()=>{
+ answerQuiz("lab","lab-result","b","Correct! Verify independently using the official website.");
+});
+
+// LOCAL COMMUNITY DEMO
+function loadPosts(){
+ let posts=[];
+ try{posts=JSON.parse(localStorage.getItem("alixen-posts")||"[]");}
+ catch(e){}
+ const feed=$("feed");
+ feed.innerHTML="";
+ const welcome=document.createElement("div");
+ welcome.className="post";
+ welcome.innerHTML="<b>CYBER ALIXEN</b><p>Welcome! Share safe learning tips and defensive security knowledge.</p>";
+ feed.append(welcome);
+ posts.slice().reverse().forEach(post=>{
+  const item=document.createElement("div");
+  item.className="post";
+  const name=document.createElement("b");
+  name.textContent=post.name;
+  const message=document.createElement("p");
+  message.textContent=post.text;
+  item.append(name,message);
+  feed.append(item);
+ });
+}
+$("post-btn").addEventListener("click",()=>{
+ const text=$("post-text").value.trim();
+ if(!text)return;
+ let posts=[];
+ try{posts=JSON.parse(localStorage.getItem("alixen-posts")||"[]");}
+ catch(e){}
+ posts.push({
+  name:$("post-name").value.trim().slice(0,30)||"Learner",
+  text:text.slice(0,400)
+ });
+ try{
+  localStorage.setItem("alixen-posts",JSON.stringify(posts));
+  $("post-text").value="";
+  loadPosts();
+ }catch(e){
+  alert("Browser storage is unavailable.");
+ }
+});
+loadPosts();
+
+// DEVICE INFORMATION
+const ua=navigator.userAgent;
+$("browser-info").textContent=
+ ua.includes("Edg")?"Microsoft Edge":
+ ua.includes("Chrome")?"Chrome":
+ ua.includes("Firefox")?"Firefox":
+ ua.includes("Safari")?"Safari":"Browser";
+$("screen-info").textContent=screen.width+" × "+screen.height;
+$("language-info").textContent=navigator.language||"Not provided";
+$("platform-info").textContent=navigator.userAgentData?.platform||navigator.platform||"Not provided";
+$("year").textContent=new Date().getFullYear();
+</script>
 </body>
 </html>
