@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d18">
+  <title>CYBER ALIXEN | Security Platform</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/">CYBER <span>ALIXEN</span></a>
+    <span class="status"><i></i> PLATFORM ONLINE</span>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <p class="eyebrow">CYBERSECURITY LEARNING PLATFORM</p>
+      <h1>Protect. Learn. <span>Secure.</span></h1>
+      <p class="intro">
+        Learn cybersecurity, explore defensive security tools,
+        and build safer digital habits.
+      </p>
+      <div class="hero-actions">
+        <a class="button primary" href="#tools">Explore tools</a>
+        <a class="button secondary" href="#learning">Start learning</a>
+      </div>
+    </section>
+
+    <section class="stats">
+      <article class="stat">
+        <span class="stat-label">PLATFORM</span>
+        <strong id="platform-status">Checking...</strong>
+      </article>
+      <article class="stat">
+        <span class="stat-label">VERSION</span>
+        <strong>1.0.0</strong>
+      </article>
+      <article class="stat">
+        <span class="stat-label">SECURITY TOOLS</span>
+        <strong>03</strong>
+      </article>
+    </section>
+
+    <section id="tools">
+      <div class="section-heading">
+        <p class="eyebrow">DEFENSIVE UTILITIES</p>
+        <h2>Security tools</h2>
+      </div>
+
+      <div class="tool-grid">
+        <article class="panel">
+          <h3>SHA-256 Hash Generator</h3>
+          <p>Generate a SHA-256 hash from text you enter.</p>
+          <label for="hash-input">Text to hash</label>
+          <textarea id="hash-input" placeholder="Enter text here..."></textarea>
+          <button class="button primary" id="hash-button">Generate hash</button>
+          <pre id="hash-result" class="result">Your hash will appear here.</pre>
+        </article>
+
+        <article class="panel">
+          <h3>Password Safety Check</h3>
+          <p>Get a basic, local estimate of password strength.</p>
+          <label for="password-input">Test a sample password</label>
+          <input id="password-input" type="password"
+                 autocomplete="off" placeholder="Enter a sample">
+          <button class="button primary" id="password-button">Check strength</button>
+          <p id="password-result" class="result" aria-live="polite">
+            Your result will appear here.
+          </p>
+          <p class="hint">Do not enter a real or reused password.</p>
+        </article>
+
+        <article class="panel">
+          <h3>Platform API</h3>
+          <p>Check whether the CYBER ALIXEN backend is responding.</p>
+          <button class="button primary" id="health-button">Check status</button>
+          <pre id="health-result" class="result">Waiting for check...</pre>
+        </article>
+      </div>
+    </section>
+
+    <section id="learning">
+      <div class="section-heading">
+        <p class="eyebrow">SECURITY AWARENESS</p>
+        <h2>Phishing awareness quiz</h2>
+      </div>
+
+      <article class="panel quiz">
+        <h3>Which is the safest response to an unexpected email asking you to sign in?</h3>
+        <label class="choice">
+          <input type="radio" name="quiz" value="a">
+          Click the email link immediately.
+        </label>
+        <label class="choice">
+          <input type="radio" name="quiz" value="b">
+          Visit the official website yourself and verify the message.
+        </label>
+        <label class="choice">
+          <input type="radio" name="quiz" value="c">
+          Reply with your password.
+        </label>
+        <button class="button primary" id="quiz-button">Submit answer</button>
+        <p id="quiz-result" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <section class="panel roadmap">
+      <p class="eyebrow">COMING NEXT</p>
+      <h2>Platform roadmap</h2>
+      <ul>
+        <li>Secure user registration and sign-in</li>
+        <li>AI assistant for defensive security questions</li>
+        <li>Community discussions and groups</li>
+        <li>Safe, isolated cybersecurity practice labs</li>
+        <li>Android and desktop applications</li>
+      </ul>
+    </section>
+
+    <footer>
+      <strong>CYBER ALIXEN</strong>
+      <p>Built for learning, defensive security, and safer technology.</p>
+    </footer>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
